@@ -2,10 +2,10 @@ apiVersion: v2
 name: demo-helm
 description: A Helm chart for Kubernetes
 
-maintainers: # (optional)
-  - name: David L Whitehurst 
-    email: me@dlwhitehurst.com 
-    url:
+maintainers:
+  - name: David L Whitehurst
+    email: me@dlwhitehurst.com
+    url: https://dlwhitehurst.com
 
 # A chart can be either an 'application' or a 'library' chart.
 #
