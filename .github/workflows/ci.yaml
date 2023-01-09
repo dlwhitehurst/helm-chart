@@ -1,9 +1,11 @@
 name: Lint and Test Charts
 
 on:
-  pull_request:
-    paths:
+  push:
+    branches:
+      - main
       - 'charts/**'
+  pull_request:
 
 jobs:
   lint-chart:
