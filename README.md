@@ -1,2 +1,2 @@
-# helm-chart
+# helm-charts
 Initial helm chart repo
