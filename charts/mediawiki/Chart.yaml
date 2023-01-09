@@ -1,5 +1,9 @@
 apiVersion: v1
 appVersion: 1.33.1
+dependencies:
+  - name: mariadb
+    repository: https://charts.bitnami.com/bitnami
+    version: 10.6.11 
 description: Extremely powerful, scalable software and a feature-rich wiki implementation
   that uses PHP to process and display data stored in a database.
 engine: gotpl
