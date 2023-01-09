@@ -3,7 +3,7 @@ name: demo-helm
 description: A Helm chart for Kubernetes
 
 maintainers:
-  - name: David L Whitehurst
+  - name: dlwhitehurst 
     email: me@dlwhitehurst.com
     url: https://dlwhitehurst.com
 
