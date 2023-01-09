@@ -15,6 +15,7 @@ keywords:
 maintainers:
 - email: containers@bitnami.com
   name: Bitnami
+- name: dlwhitehurst
 name: mediawiki
 sources:
 - https://github.com/bitnami/bitnami-docker-mediawiki
