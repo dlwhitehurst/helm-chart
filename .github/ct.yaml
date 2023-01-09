@@ -3,5 +3,5 @@ check-version-increment: false
 debug: true
 chart-repos: 
   - bitnami=https://charts.bitnami.com/bitnami
-  - kubernetes=https://kubernetes-charts.storage.googleapis.com/
+  - mariadb=https://kubernetes-charts.storage.googleapis.com/
 target-branch: main
