@@ -116,6 +116,9 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+podSecurityPolicy:
+  enabled: false
+
 rbac:
   # Specifies whether RBAC resources should be created
   create: false
