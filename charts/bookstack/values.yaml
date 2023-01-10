@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: solidnerd/bookstack 
-  pullPolicy: Always 
+  repository: solidnerd/bookstack
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -38,7 +38,7 @@ externalDatabase:
 ## MariaDB chart configuration
 ##
 mariadb:
-  ## use a MariaDB sub-chart? With this set to true, we would expect a charts folder with the mariadb 
+  ## use a MariaDB sub-chart? With this set to true, we would expect a charts folder with the mariadb
   ## sub-chart. Currently we do not have a sub-chart implementation but we also are not using the external
   ## database configuration.
   enabled: true
@@ -118,7 +118,7 @@ fullnameOverride: ""
 
 rbac:
   # Specifies whether RBAC resources should be created
-  create: false 
+  create: false
 
 serviceAccount:
   # Specifies whether a service account should be created
