@@ -4,10 +4,6 @@ description: A helm chart for Bookstack
 maintainers:
   - name: dlwhitehurst
     email: dlwhitehurst@gmail.com
-dependencies:
-  - name: mariadb
-    repository: https://charts.bitnami.com/bitnami
-    version: 11.4.2
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
