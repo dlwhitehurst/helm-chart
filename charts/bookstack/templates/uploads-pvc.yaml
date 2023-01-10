@@ -1,8 +1,8 @@
-{{- if and .Values.persistence.includes.enabled (not .Values.persistence.includes.existingClaim) -}}
+{{- if and .Values.persistence.uploads.enabled (not .Values.persistence.uploads.existingClaim) -}}
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ include "bookstack.fullname" . }}-includes
+  name: {{ include "bookstack.fullname" . }}-uploads
   labels:
     app: {{ include "bookstack.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -10,15 +10,15 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   accessModes:
-    - {{ .Values.persistence.includes.accessMode | quote }}
+    - {{ .Values.persistence.uploads.accessMode | quote }}
   resources:
     requests:
-      storage: {{ .Values.persistence.includes.size | quote }}
-{{- if .Values.persistence.includes.storageClass }}
-{{- if (eq "-" .Values.persistence.includes.storageClass) }}
+      storage: {{ .Values.persistence.uploads.size | quote }}
+{{- if .Values.persistence.uploads.storageClass }}
+{{- if (eq "-" .Values.persistence.uploads.storageClass) }}
   storageClassName: ""
 {{- else }}
-  storageClassName: "{{ .Values.persistence.includes.storageClass }}"
+  storageClassName: "{{ .Values.persistence.uploads.storageClass }}"
 {{- end }}
 {{- end }}
 {{- end }}
