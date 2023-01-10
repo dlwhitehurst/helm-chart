@@ -1,7 +1,10 @@
 apiVersion: v2
 name: bookstack
 description: A Helm chart for Kubernetes
-
+maintainers:
+  - name: dlwhitehurst
+    email: dlwhitehurst@gmail.com
+    url: https://github.com/dlwhitehurst/helm-charts
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
