@@ -1,5 +1,20 @@
 apiVersion: v1
 entries:
+  bookstack:
+  - apiVersion: v2
+    appVersion: 22.11.0
+    created: "2023-01-10T20:30:09.191373725Z"
+    description: A Helm chart for Kubernetes
+    digest: 5ae980cced5a5e4db2a60d19081c7476e596e633b63ef155512bc9ceaf8ecf8b
+    maintainers:
+    - email: dlwhitehurst@gmail.com
+      name: dlwhitehurst
+      url: https://github.com/dlwhitehurst/helm-charts
+    name: bookstack
+    type: application
+    urls:
+    - https://github.com/dlwhitehurst/helm-charts/releases/download/bookstack-0.1.0/bookstack-0.1.0.tgz
+    version: 0.1.0
   demo-helm:
   - apiVersion: v2
     appVersion: 21.12.1
@@ -26,4 +41,4 @@ entries:
     urls:
     - https://github.com/dlwhitehurst/helm-charts/releases/download/demo-helm-0.1.1/demo-helm-0.1.1.tgz
     version: 0.1.1
-generated: "2023-01-10T14:34:57.666807721Z"
+generated: "2023-01-10T20:30:09.191483426Z"
