@@ -8,17 +8,17 @@ maintainers:
 dependencies:
   - name: mariadb
     version: 11.4.2
-    repository: https://charts.bitnami.com/bitnami 
+    repository: https://charts.bitnami.com/bitnami
     condition: mariadb.enabled
     tags:
       - bookstack-database
-#dependencies:
-#- name: mariadb
-#  version: 7.x.x
-#  repository: https://kubernetes-charts.storage.googleapis.com/
-#  condition: mariadb.enabled
-#  tags:
-#    - bookstack-database
+# dependencies:
+# - name: mariadb
+#   version: 7.x.x
+#   repository: https://kubernetes-charts.storage.googleapis.com/
+#   condition: mariadb.enabled
+#   tags:
+#     - bookstack-database
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
