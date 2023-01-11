@@ -37,7 +37,7 @@ spec:
       containers:
       - env:
         - name: DB_HOST
-          value: bookstack-mariadb
+          value: bookstack.bookstack-mariadb.svc.cluster.local
         - name: DB_DATABASE
           value: bookstack
         - name: DB_USER
@@ -47,6 +47,8 @@ spec:
             secretKeyRef:
               key: mariadb-password
               name: bookstack-mariadb
+        - name: APP_URL
+          value: https://bookstack.dlwhitehurst.com
         image: solidnerd/bookstack:22.11.0
         imagePullPolicy: Always
         name: bookstack
