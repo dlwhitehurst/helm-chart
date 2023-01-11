@@ -7,8 +7,6 @@ maintainers:
     url: https://github.com/dlwhitehurst/helm-charts
 dependencies:
   - name: mariadb
-    version: 11.4.2
-    repository: https://charts.bitnami.com/bitnami
     condition: mariadb.enabled
     tags:
       - bookstack-database
