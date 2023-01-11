@@ -1,0 +1,773 @@
+NAME: bookstack
+LAST DEPLOYED: Wed Jan 11 09:15:18 2023
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+USER-SUPPLIED VALUES:
+affinity: {}
+app:
+  key: null
+autoscaling:
+  enabled: false
+  maxReplicas: 100
+  minReplicas: 1
+  targetCPUUtilizationPercentage: 80
+env: {}
+externalDatabase:
+  database: bookstack
+  host: null
+  password: null
+  port: 3306
+  user: bookstack
+fullnameOverride: ""
+image:
+  pullPolicy: Always
+  repository: solidnerd/bookstack
+  tag: ""
+imagePullSecrets: []
+ingress:
+  annotations:
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+  className: nginx
+  enabled: true
+  hosts:
+  - host: bookstack.dlwhitehurst.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - bookstack.dlwhitehurst.com
+    secretName: bookstack-tls-prod
+mariadb:
+  db:
+    name: bookstack
+    password: abc123
+    rootUser:
+      password: xyz890
+    user: bookstack
+  enabled: true
+  master:
+    persistence:
+      accessMode: ReadWriteOnce
+      enabled: false
+      size: 8Gi
+  replication:
+    enabled: false
+nameOverride: ""
+nodeSelector: {}
+persistence:
+  storage:
+    accessMode: ReadWriteOnce
+    enabled: true
+    size: 8Gi
+  uploads:
+    accessMode: ReadWriteOnce
+    enabled: true
+    size: 8Gi
+podAnnotations: {}
+podSecurityContext: {}
+podSecurityPolicy:
+  enabled: false
+rbac:
+  create: false
+replicaCount: 1
+resources: {}
+securityContext: {}
+service:
+  port: 80
+  type: ClusterIP
+serviceAccount:
+  annotations: {}
+  create: true
+  name: ""
+tolerations: []
+
+COMPUTED VALUES:
+affinity: {}
+app: {}
+autoscaling:
+  enabled: false
+  maxReplicas: 100
+  minReplicas: 1
+  targetCPUUtilizationPercentage: 80
+env: {}
+externalDatabase:
+  database: bookstack
+  port: 3306
+  user: bookstack
+fullnameOverride: ""
+image:
+  pullPolicy: Always
+  repository: solidnerd/bookstack
+  tag: ""
+imagePullSecrets: []
+ingress:
+  annotations:
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+  className: nginx
+  enabled: true
+  hosts:
+  - host: bookstack.dlwhitehurst.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - bookstack.dlwhitehurst.com
+    secretName: bookstack-tls-prod
+mariadb:
+  db:
+    forcePassword: false
+    name: bookstack
+    password: abc123
+    rootUser:
+      password: xyz890
+    user: bookstack
+  enabled: true
+  fullnameOverride: bookstack-mariadb
+  global: {}
+  image:
+    debug: false
+    pullPolicy: IfNotPresent
+    registry: docker.io
+    repository: bitnami/mariadb
+    tag: 10.3.18-debian-9-r36
+  master:
+    affinity: {}
+    antiAffinity: soft
+    config: |-
+      [mysqld]
+      skip-name-resolve
+      explicit_defaults_for_timestamp
+      basedir=/opt/bitnami/mariadb
+      plugin_dir=/opt/bitnami/mariadb/plugin
+      port=3306
+      socket=/opt/bitnami/mariadb/tmp/mysql.sock
+      tmpdir=/opt/bitnami/mariadb/tmp
+      max_allowed_packet=16M
+      bind-address=0.0.0.0
+      pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
+      log-error=/opt/bitnami/mariadb/logs/mysqld.log
+      character-set-server=UTF8
+      collation-server=utf8_general_ci
+
+      [client]
+      port=3306
+      socket=/opt/bitnami/mariadb/tmp/mysql.sock
+      default-character-set=UTF8
+      plugin_dir=/opt/bitnami/mariadb/plugin
+
+      [manager]
+      port=3306
+      socket=/opt/bitnami/mariadb/tmp/mysql.sock
+      pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
+    extraInitContainers: ""
+    livenessProbe:
+      enabled: true
+      failureThreshold: 3
+      initialDelaySeconds: 120
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    nodeSelector: {}
+    persistence:
+      accessMode: ReadWriteOnce
+      accessModes:
+      - ReadWriteOnce
+      annotations: {}
+      enabled: false
+      mountPath: /bitnami/mariadb
+      size: 8Gi
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+    readinessProbe:
+      enabled: true
+      failureThreshold: 3
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources: {}
+    service:
+      annotations: {}
+    tolerations: []
+    updateStrategy:
+      type: RollingUpdate
+  metrics:
+    annotations:
+      prometheus.io/port: "9104"
+      prometheus.io/scrape: "true"
+    enabled: false
+    extraArgs:
+      master: []
+      slave: []
+    image:
+      pullPolicy: IfNotPresent
+      registry: docker.io
+      repository: bitnami/mysqld-exporter
+      tag: 0.12.1-debian-9-r75
+    livenessProbe:
+      enabled: true
+      failureThreshold: 3
+      initialDelaySeconds: 120
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    readinessProbe:
+      enabled: true
+      failureThreshold: 3
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources: {}
+    serviceMonitor:
+      enabled: false
+      selector:
+        prometheus: kube-prometheus
+  rbac:
+    create: false
+  replication:
+    enabled: false
+    forcePassword: false
+    user: replicator
+  rootUser:
+    forcePassword: false
+  securityContext:
+    enabled: true
+    fsGroup: 1001
+    runAsUser: 1001
+  service:
+    port: 3306
+    type: ClusterIP
+  serviceAccount:
+    create: false
+  slave:
+    affinity: {}
+    antiAffinity: soft
+    config: |-
+      [mysqld]
+      skip-name-resolve
+      explicit_defaults_for_timestamp
+      basedir=/opt/bitnami/mariadb
+      port=3306
+      socket=/opt/bitnami/mariadb/tmp/mysql.sock
+      tmpdir=/opt/bitnami/mariadb/tmp
+      max_allowed_packet=16M
+      bind-address=0.0.0.0
+      pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
+      log-error=/opt/bitnami/mariadb/logs/mysqld.log
+      character-set-server=UTF8
+      collation-server=utf8_general_ci
+
+      [client]
+      port=3306
+      socket=/opt/bitnami/mariadb/tmp/mysql.sock
+      default-character-set=UTF8
+
+      [manager]
+      port=3306
+      socket=/opt/bitnami/mariadb/tmp/mysql.sock
+      pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
+    extraInitContainers: ""
+    livenessProbe:
+      enabled: true
+      failureThreshold: 3
+      initialDelaySeconds: 120
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    nodeSelector: {}
+    persistence:
+      accessModes:
+      - ReadWriteOnce
+      enabled: true
+      size: 8Gi
+    podDisruptionBudget:
+      enabled: false
+      minAvailable: 1
+    readinessProbe:
+      enabled: true
+      failureThreshold: 3
+      initialDelaySeconds: 45
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    replicas: 1
+    resources: {}
+    service:
+      annotations: {}
+    tolerations: []
+    updateStrategy:
+      type: RollingUpdate
+  volumePermissions:
+    enabled: false
+    image:
+      pullPolicy: Always
+      registry: docker.io
+      repository: bitnami/minideb
+      tag: stretch
+    resources: {}
+nameOverride: ""
+nodeSelector: {}
+persistence:
+  storage:
+    accessMode: ReadWriteOnce
+    enabled: true
+    size: 8Gi
+  uploads:
+    accessMode: ReadWriteOnce
+    enabled: true
+    size: 8Gi
+podAnnotations: {}
+podSecurityContext: {}
+podSecurityPolicy:
+  enabled: false
+rbac:
+  create: false
+replicaCount: 1
+resources: {}
+securityContext: {}
+service:
+  port: 80
+  type: ClusterIP
+serviceAccount:
+  annotations: {}
+  create: true
+  name: ""
+tolerations: []
+
+HOOKS:
+---
+# Source: bookstack/charts/mariadb/templates/test-runner.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "bookstack-mariadb-test-j2clv"
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  initContainers:
+    - name: "test-framework"
+      image: "dduportal/bats:0.4.0"
+      command:
+        - "bash"
+        - "-c"
+        - |
+          set -ex
+          # copy bats to tools dir
+          cp -R /usr/local/libexec/ /tools/bats/
+      volumeMounts:
+      - mountPath: /tools
+        name: tools
+  containers:
+    - name: mariadb-test
+      image: docker.io/bitnami/mariadb:10.3.18-debian-9-r36
+      imagePullPolicy: "IfNotPresent"
+      command: ["/tools/bats/bats", "-t", "/tests/run.sh"]
+      env:
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: bookstack-mariadb
+              key: mariadb-root-password
+      volumeMounts:
+      - mountPath: /tests
+        name: tests
+        readOnly: true
+      - mountPath: /tools
+        name: tools
+  volumes:
+  - name: tests
+    configMap:
+      name: bookstack-mariadb-tests
+  - name: tools
+    emptyDir: {}
+  restartPolicy: Never
+---
+# Source: bookstack/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "bookstack-test-connection"
+  labels:
+    helm.sh/chart: bookstack-0.1.1
+    app.kubernetes.io/name: bookstack
+    app.kubernetes.io/instance: bookstack
+    app.kubernetes.io/version: "22.11.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['bookstack:80']
+  restartPolicy: Never
+MANIFEST:
+---
+# Source: bookstack/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bookstack
+  labels:
+    helm.sh/chart: bookstack-0.1.1
+    app.kubernetes.io/name: bookstack
+    app.kubernetes.io/instance: bookstack
+    app.kubernetes.io/version: "22.11.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: bookstack/charts/mariadb/templates/secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bookstack-mariadb
+  labels:
+    app: "mariadb"
+    chart: "mariadb-7.0.0"
+    release: "bookstack"
+    heritage: "Helm"
+type: Opaque
+data:
+  mariadb-root-password: "OXl2Rkgzak9Ibw=="
+  
+  mariadb-password: "YWJjMTIz"
+---
+# Source: bookstack/charts/mariadb/templates/master-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bookstack-mariadb
+  labels:
+    app: "mariadb"
+    component: "master"
+    chart: "mariadb-7.0.0"
+    release: "bookstack"
+    heritage: "Helm"
+data:
+  my.cnf: |-
+    [mysqld]
+    skip-name-resolve
+    explicit_defaults_for_timestamp
+    basedir=/opt/bitnami/mariadb
+    plugin_dir=/opt/bitnami/mariadb/plugin
+    port=3306
+    socket=/opt/bitnami/mariadb/tmp/mysql.sock
+    tmpdir=/opt/bitnami/mariadb/tmp
+    max_allowed_packet=16M
+    bind-address=0.0.0.0
+    pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
+    log-error=/opt/bitnami/mariadb/logs/mysqld.log
+    character-set-server=UTF8
+    collation-server=utf8_general_ci
+    
+    [client]
+    port=3306
+    socket=/opt/bitnami/mariadb/tmp/mysql.sock
+    default-character-set=UTF8
+    plugin_dir=/opt/bitnami/mariadb/plugin
+    
+    [manager]
+    port=3306
+    socket=/opt/bitnami/mariadb/tmp/mysql.sock
+    pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
+---
+# Source: bookstack/charts/mariadb/templates/tests.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bookstack-mariadb-tests
+data:
+  run.sh: |-
+    @test "Testing MariaDB is accessible" {
+      mysql -h bookstack-mariadb -uroot -p$MARIADB_ROOT_PASSWORD -e 'show databases;'
+    }
+---
+# Source: bookstack/templates/storage-pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: bookstack-storage
+  labels:
+    app: bookstack
+    chart: "bookstack-0.1.1"
+    release: "bookstack"
+    heritage: "Helm"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "8Gi"
+---
+# Source: bookstack/templates/uploads-pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: bookstack-uploads
+  labels:
+    app: bookstack
+    chart: "bookstack-0.1.1"
+    release: "bookstack"
+    heritage: "Helm"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "8Gi"
+---
+# Source: bookstack/charts/mariadb/templates/master-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookstack-mariadb
+  labels:
+    app: "mariadb"
+    component: "master"
+    chart: "mariadb-7.0.0"
+    release: "bookstack"
+    heritage: "Helm"
+spec:
+  type: ClusterIP
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: mysql
+  selector:
+    app: "mariadb"
+    component: "master"
+    release: "bookstack"
+---
+# Source: bookstack/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookstack
+  labels:
+    helm.sh/chart: bookstack-0.1.1
+    app.kubernetes.io/name: bookstack
+    app.kubernetes.io/instance: bookstack
+    app.kubernetes.io/version: "22.11.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: bookstack
+    app.kubernetes.io/instance: bookstack
+---
+# Source: bookstack/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstack
+  labels:
+    helm.sh/chart: bookstack-0.1.1
+    app.kubernetes.io/name: bookstack
+    app.kubernetes.io/instance: bookstack
+    app.kubernetes.io/version: "22.11.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: bookstack
+      app.kubernetes.io/instance: bookstack
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: bookstack
+        app.kubernetes.io/instance: bookstack
+    spec:
+      serviceAccountName: bookstack
+      securityContext:
+        {}
+      containers:
+        - name: bookstack
+          securityContext:
+            {}
+          image: "solidnerd/bookstack:22.11.0"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          env:
+            - name: DB_HOST
+              value: bookstack-mariadb
+            - name: DB_DATABASE
+              value: "bookstack"
+            - name: DB_USERNAME
+              value: "bookstack"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bookstack-mariadb
+                  key: mariadb-password
+          resources:
+            {}
+          volumeMounts:
+          - name: uploads
+            mountPath: /var/www/bookstack/public/uploads
+          - name: storage
+            mountPath: /var/www/bookstack/storage/uploads
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: bookstack-uploads
+        - name: storage
+          persistentVolumeClaim:
+            claimName: bookstack-storage
+---
+# Source: bookstack/charts/mariadb/templates/master-statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bookstack-mariadb
+  labels:
+    app: mariadb
+    chart: mariadb-7.0.0
+    release: bookstack
+    heritage: Helm
+    component: master
+spec:
+  selector:
+    matchLabels:
+      app: mariadb
+      release: bookstack
+      component: master
+  serviceName: bookstack-mariadb
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mariadb
+        chart: mariadb-7.0.0
+        release: bookstack
+        component: master
+    spec:
+      serviceAccountName: default
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    app: mariadb
+                    release: bookstack      
+      initContainers:
+      containers:
+        - name: "mariadb"
+          image: docker.io/bitnami/mariadb:10.3.18-debian-9-r36
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bookstack-mariadb
+                  key: mariadb-root-password
+            - name: MARIADB_USER
+              value: "bookstack"
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bookstack-mariadb
+                  key: mariadb-password
+            - name: MARIADB_DATABASE
+              value: "bookstack"
+          ports:
+            - name: mysql
+              containerPort: 3306
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "exec mysqladmin status -uroot -p$MARIADB_ROOT_PASSWORD"]
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "exec mysqladmin status -uroot -p$MARIADB_ROOT_PASSWORD"]
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          volumeMounts:
+            - name: data
+              mountPath: /bitnami/mariadb
+            - name: config
+              mountPath: /opt/bitnami/mariadb/conf/my.cnf
+              subPath: my.cnf
+      volumes:
+        - name: config
+          configMap:
+            name: bookstack-mariadb
+        - name: data
+          emptyDir: {}
+---
+# Source: bookstack/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bookstack
+  labels:
+    helm.sh/chart: bookstack-0.1.1
+    app.kubernetes.io/name: bookstack
+    app.kubernetes.io/instance: bookstack
+    app.kubernetes.io/version: "22.11.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "bookstack.dlwhitehurst.com"
+      secretName: bookstack-tls-prod
+  rules:
+    - host: "bookstack.dlwhitehurst.com"
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: bookstack
+                port:
+                  number: 80
+
+NOTES:
+1. Get the application URL by running these commands:
+  https://bookstack.dlwhitehurst.com/
