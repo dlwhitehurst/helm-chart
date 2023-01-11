@@ -37,23 +37,15 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8080 
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8080 
           env:
           {{- if .Values.mariadb.enabled }}
             - name: DB_HOST
               value: {{ template "bookstack.mariadb.fullname" . }}
             - name: DB_DATABASE
               value: {{ .Values.mariadb.db.name | quote }}
-            - name: DB_USERNAME
+            - name: DB_USER
               value: {{ .Values.mariadb.db.user | quote }}
-            - name: DB_PASSWORD
+            - name: DB_PASS
               valueFrom:
                 secretKeyRef:
                   name: {{ template "bookstack.mariadb.fullname" . }}
@@ -63,9 +55,9 @@ spec:
               value: {{ .Values.externalDatabase.host | quote }}
             - name: DB_DATABASE
               value: {{ .Values.externalDatabase.database | quote }}
-            - name: DB_USERNAME
+            - name: DB_USER
               value: {{ .Values.externalDatabase.user | quote }}
-            - name: DB_PASSWORD
+            - name: DB_PASS
               valueFrom:
                 secretKeyRef:
                   name: {{ printf "%s-%s" .Release.Name "externaldb" }}

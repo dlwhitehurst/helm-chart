@@ -5,7 +5,6 @@ metadata:
     deployment.kubernetes.io/revision: "1"
     meta.helm.sh/release-name: bookstack
     meta.helm.sh/release-namespace: bookstack
-  creationTimestamp: "2023-01-11T15:01:34Z"
   generation: 1
   labels:
     app.kubernetes.io/instance: bookstack
@@ -15,8 +14,6 @@ metadata:
     helm.sh/chart: bookstack-0.1.1
   name: bookstack
   namespace: bookstack
-  resourceVersion: "5008096"
-  uid: 2173be32-d948-48f7-aa8c-749b8b43d40c
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -43,38 +40,20 @@ spec:
           value: bookstack-mariadb
         - name: DB_DATABASE
           value: bookstack
-        - name: DB_USERNAME
+        - name: DB_USER
           value: bookstack
-        - name: DB_PASSWORD
+        - name: DB_PASS
           valueFrom:
             secretKeyRef:
               key: mariadb-password
               name: bookstack-mariadb
         image: solidnerd/bookstack:22.11.0
         imagePullPolicy: Always
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /
-            port: http
-            scheme: HTTP
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
         name: bookstack
         ports:
         - containerPort: 8080
           name: http
           protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /
-            port: http
-            scheme: HTTP
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
         resources: {}
         securityContext: {}
         terminationMessagePath: /dev/termination-log
@@ -98,21 +77,3 @@ spec:
       - name: storage
         persistentVolumeClaim:
           claimName: bookstack-storage
-status:
-  conditions:
-  - lastTransitionTime: "2023-01-11T15:01:34Z"
-    lastUpdateTime: "2023-01-11T15:01:34Z"
-    message: Deployment does not have minimum availability.
-    reason: MinimumReplicasUnavailable
-    status: "False"
-    type: Available
-  - lastTransitionTime: "2023-01-11T15:01:34Z"
-    lastUpdateTime: "2023-01-11T15:01:34Z"
-    message: ReplicaSet "bookstack-5d9b967755" is progressing.
-    reason: ReplicaSetUpdated
-    status: "True"
-    type: Progressing
-  observedGeneration: 1
-  replicas: 1
-  unavailableReplicas: 1
-  updatedReplicas: 1
