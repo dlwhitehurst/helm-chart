@@ -31,7 +31,7 @@ externalDatabase:
   user: bookstack
 
   ## Database password
-  password: 
+  password:
 
   ## Database name
   database: bookstack
@@ -43,7 +43,7 @@ mariadb:
   ## use a MariaDB sub-chart? With this set to true, we would expect a charts folder with the mariadb
   ## sub-chart. Currently we do not have a sub-chart implementation but we are now using the external
   ## database configuration.
-  enabled: false 
+  enabled: false
 
   ## Disable MariaDB replication
   replication:
