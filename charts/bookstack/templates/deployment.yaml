@@ -39,13 +39,13 @@ spec:
               protocol: TCP
           env:
             - name: APP_URL
-              value:  {{ .Values.appurl | quote }} 
+              value:  {{ .Values.app.url | quote }} 
           {{- if .Values.mariadb.enabled }}
             - name: DB_HOST
               value: {{ template "bookstack.mariadb.fullname" . }}
             - name: DB_DATABASE
               value: {{ .Values.mariadb.db.name | quote }}
-            - name: DB_USER
+            - name: DB_USERNAME
               value: {{ .Values.mariadb.db.user | quote }}
             - name: DB_PASSWORD
               valueFrom:
@@ -57,7 +57,7 @@ spec:
               value: {{ .Values.externalDatabase.host | quote }}
             - name: DB_DATABASE
               value: {{ .Values.externalDatabase.database | quote }}
-            - name: DB_USER
+            - name: DB_USERNAME
               value: {{ .Values.externalDatabase.user | quote }}
             - name: DB_PASSWORD
               valueFrom:
@@ -110,3 +110,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+

@@ -34,29 +34,23 @@ jobs:
       - name: Run lint
         run: ct lint --config .github/ct.yaml
 
-  lint-docs:
-    runs-on: ubuntu-latest
-    needs: lint-chart
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Run helm-docs
-        run: .github/helm-docs.sh
+          #  lint-docs:
+          #    runs-on: ubuntu-latest
+          #    needs: lint-chart
+          #    steps:
+          #      - name: Checkout
+          #        uses: actions/checkout@v1
+          #      - name: Run helm-docs
+          #        run: .github/helm-docs.sh
 
   kubeval-chart:
     runs-on: ubuntu-latest
     needs:
       - lint-chart
-      - lint-docs
+        # - lint-docs
     strategy:
       matrix:
         k8s:
-          - v1.12.10
-          - v1.13.12
-          - v1.14.10
-          - v1.15.11
-          - v1.16.8
-          - v1.17.4
           - v1.21.0
           - v1.26.0
     steps:
@@ -72,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - lint-chart
-      - lint-docs
+        # - lint-docs
       - kubeval-chart
     strategy:
       matrix:

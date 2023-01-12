@@ -5,13 +5,12 @@ metadata:
     deployment.kubernetes.io/revision: "1"
     meta.helm.sh/release-name: bookstack
     meta.helm.sh/release-namespace: bookstack
-  generation: 1
   labels:
     app.kubernetes.io/instance: bookstack
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: bookstack
     app.kubernetes.io/version: 22.11.0
-    helm.sh/chart: bookstack-0.1.1
+    helm.sh/chart: bookstack-0.1.8
   name: bookstack
   namespace: bookstack
 spec:
@@ -36,20 +35,17 @@ spec:
     spec:
       containers:
       - env:
-        - name: DB_HOST
-          value: bookstack.bookstack-mariadb.svc.cluster.local
-        - name: DB_DATABASE
-          value: bookstack
-        - name: DB_USER
-          value: bookstack
-        - name: DB_PASS
-          valueFrom:
-            secretKeyRef:
-              key: mariadb-password
-              name: bookstack-mariadb
         - name: APP_URL
           value: https://bookstack.dlwhitehurst.com
-        image: solidnerd/bookstack:22.11.0
+        - name: DB_HOST
+          value: 10.244.1.76
+        - name: DB_DATABASE
+          value: bookstack
+        - name: DB_USERNAME
+          value: root 
+        - name: DB_PASSWORD
+          value: mfpNpqLO6h
+        image: solidnerd/bookstack:21.12.1
         imagePullPolicy: Always
         name: bookstack
         ports:
@@ -69,8 +65,6 @@ spec:
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
-      serviceAccount: bookstack
-      serviceAccountName: bookstack
       terminationGracePeriodSeconds: 30
       volumes:
       - name: uploads
