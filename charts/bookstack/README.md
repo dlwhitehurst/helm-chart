@@ -5,9 +5,6 @@ A Helm chart for Kubernetes
 Current chart version is `0.1.9`
 
 
-
-
-
 ## Chart Values
 
 | Key | Type | Default | Description |
