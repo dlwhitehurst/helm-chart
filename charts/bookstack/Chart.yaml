@@ -8,7 +8,7 @@ maintainers:
 dependencies:
 - name: mariadb
   version: 10.3.18
-  repository: https://github.com/bitnami/containers/tree/main/bitnami/mariadb
+  repository: https://charts.bitnami.com/bitnami 
   condition: mariadb.enabled
   tags:
     - bookstack-database
