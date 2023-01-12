@@ -59,7 +59,7 @@ spec:
               value: {{ .Values.externalDatabase.database | quote }}
             - name: DB_USER
               value: {{ .Values.externalDatabase.user | quote }}
-            - name: DB_PASS
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ printf "%s-%s" .Release.Name "externaldb" }}
