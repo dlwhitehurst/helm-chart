@@ -2,21 +2,11 @@ demo-helm
 =========
 A helm chart for Bookstack
 
-This chart is used for the installation and hosting of Bookstack on Kubernetes.
-BookStack is a simple, self-hosted, easy-to-use platform for organizing and storing information.
-
-[Overview of Bookstack](https://www.bookstackapp.com/)
-
-Trademarks: This software listing is packaged by David L Whitehurst. Any respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
-
-## TL;DR
-
-```bash
-$ helm repo add dlwhitehurst https://dlwhitehurst.github.io/helm-charts/
-$ helm install bookstack dlwhitehurst/demo-helm
-```
-
 Current chart version is `0.1.2`
+
+
+
+
 
 ## Chart Values
 

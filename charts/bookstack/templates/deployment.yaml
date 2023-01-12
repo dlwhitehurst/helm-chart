@@ -24,9 +24,9 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "bookstack.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      # serviceAccountName: {{ include "bookstack.serviceAccountName" . }}
+      # securityContext:
+      #   {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -45,7 +45,7 @@ spec:
               value: {{ template "bookstack.mariadb.fullname" . }}
             - name: DB_DATABASE
               value: {{ .Values.mariadb.db.name | quote }}
-            - name: DB_USER
+            - name: DB_USERNAME
               value: {{ .Values.mariadb.db.user | quote }}
             - name: DB_PASSWORD
               valueFrom:
@@ -57,7 +57,7 @@ spec:
               value: {{ .Values.externalDatabase.host | quote }}
             - name: DB_DATABASE
               value: {{ .Values.externalDatabase.database | quote }}
-            - name: DB_USER
+            - name: DB_USERNAME
               value: {{ .Values.externalDatabase.user | quote }}
             - name: DB_PASSWORD
               valueFrom:

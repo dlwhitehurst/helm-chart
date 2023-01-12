@@ -28,7 +28,7 @@ externalDatabase:
   port: 3306
 
   ## Database user
-  user: bookstack
+  user: bookstack 
 
   ## Database password
   password:
