@@ -5,6 +5,13 @@ maintainers:
   - name: dlwhitehurst
     email: dlwhitehurst@gmail.com
     url: https://github.com/dlwhitehurst/helm-charts
+dependencies:
+- name: mariadb
+  version: 10.3.18
+  repository: https://github.com/bitnami/containers/tree/main/bitnami/mariadb
+  condition: mariadb.enabled
+  tags:
+    - bookstack-database
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
@@ -18,7 +25,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.8
+version: 0.1.9
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
