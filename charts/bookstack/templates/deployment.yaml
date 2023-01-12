@@ -47,7 +47,7 @@ spec:
               value: {{ .Values.mariadb.db.name | quote }}
             - name: DB_USER
               value: {{ .Values.mariadb.db.user | quote }}
-            - name: DB_PASS
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "bookstack.mariadb.fullname" . }}
